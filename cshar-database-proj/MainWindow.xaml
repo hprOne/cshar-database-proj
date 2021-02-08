@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cshar_database_proj"
         mc:Ignorable="d"
-        Title="QuickCar Base App" Height="550" Width="900">
+        Title="QuickCar Base App" Height="720" Width="1280">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
@@ -14,5 +14,6 @@
         <Grid.Background>
             <ImageBrush ImageSource="background.jpg"/>
         </Grid.Background>
+        <ListBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="552" VerticalAlignment="Top" Width="260" Margin="46,50,0,0"/>
     </Grid>
 </Window>

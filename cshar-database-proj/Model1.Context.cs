@@ -9,9 +9,9 @@
 
 namespace cshar_database_proj
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
+    using global::System;
+    using global::System.Data.Entity;
+    using global::System.Data.Entity.Infrastructure;
     
     public partial class SQL_QuickCarEntities : DbContext
     {

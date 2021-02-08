@@ -9,12 +9,12 @@
 
 namespace cshar_database_proj
 {
-    using System;
-    using System.Collections.Generic;
+    using global::System;
+    using global::System.Collections.Generic;
     
     public partial class RepairStatus
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RepairStatus()
         {
             this.CarsInService = new HashSet<CarsInService>();
@@ -23,7 +23,7 @@ namespace cshar_database_proj
         public int RepairStatusID { get; set; }
         public string RepairStatusText { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarsInService> CarsInService { get; set; }
     }
 }

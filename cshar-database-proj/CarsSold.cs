@@ -9,14 +9,14 @@
 
 namespace cshar_database_proj
 {
-    using System;
-    using System.Collections.Generic;
+    using global::System;
+    using global::System.Collections.Generic;
     
     public partial class CarsSold
     {
         public int CarsSoldID { get; set; }
         public int CarID { get; set; }
-        public Nullable<System.DateTime> SoldTime { get; set; }
+        public Nullable<global::System.DateTime> SoldTime { get; set; }
     
         public virtual Cars Cars { get; set; }
     }
