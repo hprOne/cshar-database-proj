@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cshar_database_proj"
         mc:Ignorable="d"
-        Title="QuickCar Base App" Height="450" Width="550">
+        Title="QuickCar Base App" Height="550" Width="900">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="background.jpg"/>
         </Grid.Background>
