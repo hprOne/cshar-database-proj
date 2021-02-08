@@ -9,13 +9,23 @@
     <Grid x:Name="QuickCarApp">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="170*"/>
+            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="640*"/>
+            <ColumnDefinition Width="417*"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="background2.jpg"/>
         </Grid.Background>
-        <Button x:Name="Button" Grid.ColumnSpan="2" Content="Button" HorizontalAlignment="Left" Height="55" Margin="1060,565,0,0" VerticalAlignment="Top" Width="145"/>
-        <ListBox x:Name="ListBox_Cars" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="500" Margin="35,120,0,0" VerticalAlignment="Top" Width="290"/>
-        <TextBlock x:Name="Samochody_Text" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="40" Margin="35,45,0,0" TextWrapping="Wrap" Text="SAMOCHODY" VerticalAlignment="Top" Width="290" TextAlignment="Center" FontSize="22"/>
+        <Button x:Name="Button" Content="Button" HorizontalAlignment="Left" Height="55" Margin="205,565,0,0" VerticalAlignment="Top" Width="145" Grid.Column="4"/>
+        <ListBox x:Name="ListBox_Cars" Grid.ColumnSpan="4" HorizontalAlignment="Left" Height="500" Margin="35,120,0,0" VerticalAlignment="Top" Width="290" SelectedIndex="2" Background="#7F474747"/>
+        <TextBlock x:Name="Samochody_Text" Grid.ColumnSpan="4" HorizontalAlignment="Left" Height="40" Margin="35,45,0,0" TextWrapping="Wrap" Text="SAMOCHODY" VerticalAlignment="Top" Width="290" TextAlignment="Center" FontSize="22"/>
+        <ListView x:Name="InfoView" HorizontalAlignment="Left" Height="395" Margin="185,120,0,0" VerticalAlignment="Top" Width="805" Background="#7F474747" Grid.Column="3" Grid.ColumnSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

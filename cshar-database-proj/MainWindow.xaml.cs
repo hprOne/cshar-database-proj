@@ -36,10 +36,13 @@ namespace QuickCar
                     ListBox_Cars.Items.Add(StringNameCar[i]);
                 }
                 
+
+
                 //ListBox_Cars.Items.Add = StringNameCar[0];
                                      //.ToArray();
-                //textBlok.Text = string.Join(",", StringNameCar);
+                //textBlok.Text = string.Join(",", StringNameCar);                                
             }
+            
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
