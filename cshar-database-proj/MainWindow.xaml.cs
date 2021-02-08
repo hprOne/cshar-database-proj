@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using QuickCar_System;
+using cshar_database_proj;
 
 namespace QuickCar
 {
@@ -23,7 +23,36 @@ namespace QuickCar
     {
         public MainWindow()
         {
-            //InitializeComponent();
+            InitializeComponent();
+            using (var context = new SQL_QuickCarEntities())
+            {
+                var StringNameCar = (from Cars in context.Cars
+                                     select Cars.NameCar)
+                                    .ToArray();
+                int StringNameCarLength = StringNameCar.Count();
+
+                for (int i = 0; i<StringNameCarLength; i++)
+                {
+                    ListBox_Cars.Items.Add(StringNameCar[i]);
+                }
+                
+                //ListBox_Cars.Items.Add = StringNameCar[0];
+                                     //.ToArray();
+                //textBlok.Text = string.Join(",", StringNameCar);
+            }
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new SQL_QuickCarEntities())
+            {
+                var StringNameCar = (from Cars in context.Cars
+                                     select Cars.NameCar)
+                                    .ToString();
+                var StringYearCar = (from Cars in context.Cars
+                                     select Cars.YearCar)
+                                    .FirstOrDefault();
+                //textBlok.Text = StringNameCar;
+            }
         }
     }
 }
