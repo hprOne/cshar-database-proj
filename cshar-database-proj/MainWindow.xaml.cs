@@ -57,5 +57,9 @@ namespace QuickCar
                 //textBlok.Text = StringNameCar;
             }
         }
+        private void Button_EndProgram2(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
