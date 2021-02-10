@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cshar_database_proj"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="QuickCar Base App - Welcome!!!" Height="720" Width="1280">
     <Grid x:Name="QuickCarApp">
         <Grid.ColumnDefinitions>

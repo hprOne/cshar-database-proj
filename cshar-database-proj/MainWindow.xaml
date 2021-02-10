@@ -5,20 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cshar_database_proj"
         mc:Ignorable="d"
-        Title="QuickCar Base App" Height="720" Width="1280">
+        WindowStartupLocation="CenterScreen"
+        Title="QuickCar Base App" Height="720" Width="1280" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="carsViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Cars}, CreateList=True}"/>
+    </Window.Resources>
     <Grid x:Name="QuickCarApp">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="170*"/>
-            <ColumnDefinition Width="45*"/>
-            <ColumnDefinition Width="640*"/>
-            <ColumnDefinition Width="417*"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="background2.jpg"/>
         </Grid.Background>
-        <Button x:Name="Button_EndProgram2_" Content="Zamknij Program" HorizontalAlignment="Left" Height="55" Margin="205,565,0,0" VerticalAlignment="Top" Width="145" Grid.Column="4" Click="Button_EndProgram2"/>
-        <ListBox x:Name="ListBox_Cars" Grid.ColumnSpan="4" HorizontalAlignment="Left" Height="500" Margin="35,120,0,0" VerticalAlignment="Top" Width="290" SelectedIndex="2" Background="#7F474747"/>
-        <TextBlock x:Name="Samochody_Text" Grid.ColumnSpan="4" HorizontalAlignment="Left" Height="40" Margin="35,45,0,0" TextWrapping="Wrap" Text="QuickCar" VerticalAlignment="Top" Width="290" TextAlignment="Center" FontSize="22"/>
+        <Button x:Name="Button_EndProgram2_" Content="Zamknij Program" HorizontalAlignment="Left" Height="55" Margin="1085,587,0,0" VerticalAlignment="Top" Width="145" Click="Button_EndProgram2"/>
+        <ListBox x:Name="ListBox_Cars" HorizontalAlignment="Left" Height="522" Margin="35,120,0,0" VerticalAlignment="Top" Width="290" SelectedIndex="2" Background="#7F474747"/>
+        <TextBlock x:Name="Samochody_Text" Grid.ColumnSpan="4" HorizontalAlignment="Left" Height="40" Margin="35,45,0,0" TextWrapping="Wrap" Text="Samochody" VerticalAlignment="Top" Width="290" TextAlignment="Center" FontSize="22"/>
+        <Grid HorizontalAlignment="Left" Height="405" VerticalAlignment="Top" Width="810" RenderTransformOrigin="6.55,2.45" Margin="395,120,0,0" Background="#7F2C2A2A" DataContext="{StaticResource carsViewSource}">
+            <TextBox x:Name="Text_ClientName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Margin="180,175,0,0" Text="ClientName"/>
+            <TextBox x:Name="Text_ClientSurname" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Margin="180,230,0,0" Text="ClientSurname"/>
+            <TextBox x:Name="Text_StartTime" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="StartTime" VerticalAlignment="Top" Width="120" Margin="505,175,0,0"/>
+            <TextBox x:Name="Text_StopTime" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="StopTime" VerticalAlignment="Top" Width="120" Margin="505,230,0,0"/>
+            <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="15" Margin="295,95,0,0" VerticalAlignment="Top" Width="15"/>
+            <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="18" Margin="605,92,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0,0"/>
+            <Label x:Name="CarInUseLabel" Content="CarInUse" HorizontalAlignment="Left" Height="23" Margin="175,87,0,0" VerticalAlignment="Top" Width="100"/>
+            <Label x:Name="CarInServiceLabel" Content="CarInService" HorizontalAlignment="Left" Height="23" Margin="485,84,0,0" VerticalAlignment="Top" Width="100"/>
+            <CheckBox x:Name="AllowEdit_CheckBox" Content="CheckBox" HorizontalAlignment="Left" Height="20" Margin="780,385,0,0" VerticalAlignment="Top" Width="20"/>
+        </Grid>
+        <Button x:Name="Button_AddCar_" Content="Dodaj samochód..." HorizontalAlignment="Left" Height="27" Margin="900,615,0,0" VerticalAlignment="Top" Width="160" Click="Button_AddCar"/>
+        <Button x:Name="Button_Refresh" Content="OD" HorizontalAlignment="Left" Height="27" Margin="380,615,0,0" VerticalAlignment="Top" Width="25" Click="Button_Refresh_Click"/>
     </Grid>
 </Window>
