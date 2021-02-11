@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace cshar_database_proj
+namespace QuickCar
 {
-    using global::System;
-    using global::System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
     
     public partial class CarsInService
     {
@@ -18,8 +18,8 @@ namespace cshar_database_proj
         public int CarID { get; set; }
         public string Comments { get; set; }
         public int CarStatus { get; set; }
-        public Nullable<global::System.DateTime> StartServTime { get; set; }
-        public Nullable<global::System.DateTime> StopServTime { get; set; }
+        public Nullable<System.DateTime> StartServTime { get; set; }
+        public Nullable<System.DateTime> StopServTime { get; set; }
     
         public virtual Cars Cars { get; set; }
         public virtual RepairStatus RepairStatus { get; set; }

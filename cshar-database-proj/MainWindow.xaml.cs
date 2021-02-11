@@ -79,5 +79,15 @@ namespace QuickCar
         {
             LoadTable();
         }
+
+        private void ListBox_Cars_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            using (var context = new SQL_QuickCarEntities())
+            {
+                var index = ListBox_Cars.SelectedIndex;
+                var car = context.Cars.ToList()[index];
+                Text_YearCar.Text = car.YearCar.ToString();
+            }
+        }
     }
 }
