@@ -6,15 +6,16 @@
         xmlns:local="clr-namespace:cshar_database_proj"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
         Title="QuickCar Base App - Welcome!!!" Height="720" Width="1280">
     <Grid x:Name="QuickCarApp">
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="background2.jpg"/>
+            <ImageBrush ImageSource="background.jpg"/>
         </Grid.Background>
         <Button x:Name="Button_StartProgram_" Content="Uruchom Bazę QuickCar!" HorizontalAlignment="Left" Height="55" Margin="465,355,0,0" VerticalAlignment="Top" Width="355" Click="Button_StartProgram"/>
-        <TextBlock x:Name="MainText" Foreground="#FFFFFF" HorizontalAlignment="Left" Height="165" Margin="375,65,0,0" TextWrapping="Wrap" Text="QuickCar App v1.0" VerticalAlignment="Top" Width="530" TextAlignment="Center" FontSize="36" RenderTransformOrigin="0.774,0.545" FontWeight="Bold"/>
+        <TextBlock x:Name="MainText" Foreground="#FFFFFF" HorizontalAlignment="Left" Height="68" Margin="375,162,0,0" TextWrapping="Wrap" Text="QuickCar App v1.0" VerticalAlignment="Top" Width="530" TextAlignment="Center" FontSize="36" RenderTransformOrigin="0.774,0.545" FontWeight="Bold"/>
         <Button x:Name="Button_EndProgram_" Content="Zamknij program :(" HorizontalAlignment="Left" Height="55" Margin="465,470,0,0" VerticalAlignment="Top" Width="355" Click="Button_EndProgram"/>
     </Grid>
 </Window>

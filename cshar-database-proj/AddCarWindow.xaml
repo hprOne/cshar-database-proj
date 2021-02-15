@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="Dodaj samochód..." Height="300" Width="450">
+        Title="Dodaj samochód..." Height="300" Width="450" Background="#FFC8C8C8">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15*"/>

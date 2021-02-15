@@ -61,9 +61,9 @@ namespace QuickCar
         {
             Application.Current.Shutdown();
         }
-        private void Button_AddCar(object sender, RoutedEventArgs e)
+        private void Button_AddCar_Click(object sender, RoutedEventArgs e)
         {
-            AddCarWindow addCarWindow = new AddCarWindow();
+           AddCarWindow addCarWindow = new AddCarWindow();
             addCarWindow.Show();
         }
 
@@ -87,8 +87,6 @@ namespace QuickCar
                 var index = ListBox_Cars.SelectedIndex;
                 var car = context.Cars.ToList()[index];
                 Text_YearCar.Text = car.YearCar.ToString();
-
-
             }
         }
 
@@ -100,6 +98,10 @@ namespace QuickCar
             Text_StartTime.IsEnabled = true;
             Text_StopTime.IsEnabled = true;
             Text_YearCar.IsEnabled = true;
+            IsRepairingCheckBox.IsEnabled = true;
+            IsUsingCheckBox.IsEnabled = true;
+            Button_SaveEdit.IsEnabled = true;
+            Text_Comment.IsEnabled = true;
         }
 
         private void AllowEdit_CheckBox_Unchecked(object sender, RoutedEventArgs e)
@@ -110,6 +112,16 @@ namespace QuickCar
             Text_StartTime.IsEnabled = false;
             Text_StopTime.IsEnabled = false;
             Text_YearCar.IsEnabled = false;
+            IsRepairingCheckBox.IsEnabled = false;
+            IsUsingCheckBox.IsEnabled = false;
+            Button_SaveEdit.IsEnabled = false;
+            Text_Comment.IsEnabled = false;
+        }
+
+        private void Button_DeleteCar_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteCarWindow deleteCarWindow = new DeleteCarWindow();
+            deleteCarWindow.Show();
         }
     }
 }

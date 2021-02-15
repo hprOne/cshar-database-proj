@@ -23,5 +23,10 @@ namespace QuickCar
         {
             InitializeComponent();
         }
+
+        private void ButtonNo_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
