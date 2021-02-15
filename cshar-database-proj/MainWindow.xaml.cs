@@ -86,6 +86,24 @@ namespace QuickCar
             {
                 var index = ListBox_Cars.SelectedIndex;
                 var car = context.Cars.ToList()[index];
+                var relationcar = context.CarInUse.FirstOrDefault(c => c.CarID == car.CarID);
+                if (relationcar == null)
+                {
+                    IsUsingCheckBox.IsChecked = false;
+                    Text_ClientName.Text = "*brak klienta*";
+                    Text_ClientSurname.Text = "*brak klienta*";
+                    Text_StartTime.Text = "**-**-****";
+                    Text_StopTime.Text = "**-**-****";
+                }
+                else
+                {
+                    IsUsingCheckBox.IsChecked = true;
+                    var relationclient = context.Clients.FirstOrDefault(c => c.ClientID == relationcar.ClientID);
+                    Text_ClientName.Text = relationclient.ClientName.ToString();
+                    Text_ClientSurname.Text = relationclient.ClientSurname.ToString();
+                    Text_StartTime.Text = relationcar.StartTime.ToString();
+                    Text_StopTime.Text = relationcar.StopTime.ToString();
+                }
                 Text_YearCar.Text = car.YearCar.ToString();
             }
         }
