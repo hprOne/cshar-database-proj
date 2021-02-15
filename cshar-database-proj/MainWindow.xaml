@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:cshar_database_proj"
+        xmlns:local="clr-namespace:QuickCar"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="QuickCar Base App" Height="720" Width="1280" Loaded="Window_Loaded">
@@ -16,23 +16,26 @@
         <Grid.Background>
             <ImageBrush ImageSource="background2.jpg"/>
         </Grid.Background>
-        <Button x:Name="Button_EndProgram2_" Content="Zamknij Program" HorizontalAlignment="Left" Height="55" Margin="1085,587,0,0" VerticalAlignment="Top" Width="145" Click="Button_EndProgram2"/>
+        <Button x:Name="Button_EndProgram2_" Content="Zamknij Program" HorizontalAlignment="Left" Height="59" Margin="1085,583,0,0" VerticalAlignment="Top" Width="145" Click="Button_EndProgram2"/>
         <ListBox x:Name="ListBox_Cars" HorizontalAlignment="Left" Height="522" Margin="35,120,0,0" VerticalAlignment="Top" Width="290" Background="#7F474747" SelectionChanged="ListBox_Cars_SelectionChanged"/>
-        <TextBlock x:Name="Samochody_Text" Grid.ColumnSpan="4" HorizontalAlignment="Left" Height="40" Margin="35,45,0,0" TextWrapping="Wrap" Text="Samochody" VerticalAlignment="Top" Width="290" TextAlignment="Center" FontSize="22"/>
-        <Grid HorizontalAlignment="Left" Height="405" VerticalAlignment="Top" Width="810" RenderTransformOrigin="6.55,2.45" Margin="395,120,0,0" Background="#7F2C2A2A" DataContext="{StaticResource carsViewSource}">
-            <TextBox x:Name="Text_ClientName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Margin="180,184,0,0" Text="ClientName"/>
-            <TextBox x:Name="Text_ClientSurname" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Margin="180,230,0,0" Text="ClientSurname"/>
-            <TextBox x:Name="Text_StartTime" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="StartTime" VerticalAlignment="Top" Width="120" Margin="505,184,0,0"/>
-            <TextBox x:Name="Text_StopTime" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="StopTime" VerticalAlignment="Top" Width="120" Margin="505,230,0,0"/>
-            <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="15" Margin="295,95,0,0" VerticalAlignment="Top" Width="15"/>
-            <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="18" Margin="605,92,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0,0"/>
-            <Label x:Name="CarInUseLabel" Content="CarInUse" HorizontalAlignment="Left" Height="23" Margin="175,87,0,0" VerticalAlignment="Top" Width="100"/>
-            <Label x:Name="CarInServiceLabel" Content="CarInService" HorizontalAlignment="Left" Height="23" Margin="485,84,0,0" VerticalAlignment="Top" Width="100"/>
-            <CheckBox x:Name="AllowEdit_CheckBox" Content="CheckBox" HorizontalAlignment="Left" Height="20" Margin="780,385,0,0" VerticalAlignment="Top" Width="20"/>
-            <TextBox x:Name="Text_YearCar" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Margin="180,140,0,0" Text="YearCar"/>
-            <TextBox x:Name="Text_Comment" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="655" Margin="90,337,0,0" Text="Comment"/>
+        <TextBlock x:Name="Samochody_Text" Grid.ColumnSpan="4" HorizontalAlignment="Left" Height="40" Margin="35,45,0,0" TextWrapping="Wrap" Text="Samochody" VerticalAlignment="Top" Width="290" TextAlignment="Center" FontSize="22" FontWeight="Bold"/>
+        <Grid HorizontalAlignment="Left" Height="405" VerticalAlignment="Top" Width="890" RenderTransformOrigin="6.55,2.45" Margin="340,120,0,0" Background="#7F2C2A2A" DataContext="{StaticResource carsViewSource}">
+            <TextBox x:Name="Text_ClientName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Margin="220,130,0,0" Text="ClientName" IsEnabled="False"/>
+            <TextBox x:Name="Text_ClientSurname" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Margin="220,184,0,0" Text="ClientSurname" IsEnabled="False"/>
+            <TextBox x:Name="Text_StartTime" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="StartTime" VerticalAlignment="Top" Width="120" Margin="220,239,0,0" IsEnabled="False"/>
+            <TextBox x:Name="Text_StopTime" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="StopTime" VerticalAlignment="Top" Width="120" Margin="220,295,0,0" IsEnabled="False"/>
+            <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="15" Margin="295,35,0,0" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.5,0.5"/>
+            <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="19" Margin="763,38,0,0" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0,0"/>
+            <Label x:Name="CarInUseLabel" Content="Samochód w użyciu" HorizontalAlignment="Left" Height="25" Margin="90,30,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.458,1.833"/>
+            <Label x:Name="CarInServiceLabel" Content="Samochód w naprawie" HorizontalAlignment="Left" Height="25" Margin="578,32,0,0" VerticalAlignment="Top" Width="142"/>
+            <CheckBox x:Name="AllowEdit_CheckBox" Content="CheckBox" HorizontalAlignment="Left" Margin="855,369,0,21" Width="15" Checked="AllowEdit_CheckBox_Checked" Unchecked="AllowEdit_CheckBox_Unchecked"/>
+            <TextBox x:Name="Text_YearCar" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Margin="220,78,0,0" Text="YearCar" IsEnabled="False"/>
+            <TextBox x:Name="Text_Comment" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="685" Margin="20,365,0,0" Text="Comment"/>
+            <Label x:Name="AllowEditLabel" Content="Edycja" HorizontalAlignment="Left" Height="25" Margin="805,365,0,0" VerticalAlignment="Top" Width="50" FontSize="10" RenderTransformOrigin="1.333,-0.2"/>
         </Grid>
-        <Button x:Name="Button_AddCar_" Content="Dodaj samochód..." HorizontalAlignment="Left" Height="27" Margin="900,615,0,0" VerticalAlignment="Top" Width="160" Click="Button_AddCar"/>
-        <Button x:Name="Button_Refresh" Content="OD" HorizontalAlignment="Left" Height="27" Margin="380,615,0,0" VerticalAlignment="Top" Width="25" Click="Button_Refresh_Click"/>
+        <Button x:Name="Button_AddCar_" Content="Dodaj samochód..." HorizontalAlignment="Left" Height="27" Margin="920,615,0,0" VerticalAlignment="Top" Width="160" Click="Button_AddCar"/>
+        <Button x:Name="Button_Refresh" Content="Odśwież" HorizontalAlignment="Left" Height="27" Margin="340,615,0,0" VerticalAlignment="Top" Width="78" Click="Button_Refresh_Click"/>
+        <TextBlock x:Name="InfoCar_Text" HorizontalAlignment="Left" Height="40" Margin="622,45,0,0" TextWrapping="Wrap" Text="Informacje o samochodzie" VerticalAlignment="Top" Width="290" TextAlignment="Center" FontSize="22" FontWeight="Bold"/>
+        <Button x:Name="Button_DeleteCar" Content="Usuń samochód..." HorizontalAlignment="Left" Height="27" Margin="920,583,0,0" VerticalAlignment="Top" Width="160" Click="Button_AddCar"/>
     </Grid>
 </Window>

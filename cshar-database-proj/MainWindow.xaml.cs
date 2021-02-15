@@ -87,7 +87,29 @@ namespace QuickCar
                 var index = ListBox_Cars.SelectedIndex;
                 var car = context.Cars.ToList()[index];
                 Text_YearCar.Text = car.YearCar.ToString();
+
+
             }
+        }
+
+        private void AllowEdit_CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            Text_ClientName.IsEnabled = true;
+            Text_ClientSurname.IsEnabled = true;
+            Text_Comment.IsEnabled = true;
+            Text_StartTime.IsEnabled = true;
+            Text_StopTime.IsEnabled = true;
+            Text_YearCar.IsEnabled = true;
+        }
+
+        private void AllowEdit_CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Text_ClientName.IsEnabled = false;
+            Text_ClientSurname.IsEnabled = false;
+            Text_Comment.IsEnabled = false;
+            Text_StartTime.IsEnabled = false;
+            Text_StopTime.IsEnabled = false;
+            Text_YearCar.IsEnabled = false;
         }
     }
 }

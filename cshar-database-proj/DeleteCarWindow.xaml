@@ -1,0 +1,15 @@
+﻿<Window x:Class="QuickCar.DeleteCarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuickCar"
+        mc:Ignorable="d"
+        Title="Zezwól na wykonanie operacji" Height="200" Width="400">
+    <Grid Margin="0,0,0,1">
+        <Button x:Name="ButtonNo" Content="Nie" Height="31" Margin="223,116,50,0" VerticalAlignment="Top"/>
+        <Button x:Name="ButtonYes" Content="Tak" HorizontalAlignment="Left" Height="31" Margin="50,116,0,0" VerticalAlignment="Top" Width="109"/>
+        <Label x:Name="QuestionLabel" Content="Czy chcesz usunąć ten samochód?" HorizontalAlignment="Left" Height="31" Margin="50,55,0,0" VerticalAlignment="Top" Width="292"/>
+
+    </Grid>
+</Window>
