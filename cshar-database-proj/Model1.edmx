@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SQL_QuickCarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SQL_QuickCarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CarInUse">
           <Key>
             <PropertyRef Name="HireID" />
@@ -12,8 +12,8 @@
           <Property Name="HireID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClientID" Type="int" Nullable="false" />
           <Property Name="CarID" Type="int" Nullable="false" />
-          <Property Name="StartTime" Type="datetime" />
-          <Property Name="StopTime" Type="datetime" Nullable="false" />
+          <Property Name="StartTime" Type="date" />
+          <Property Name="StopTime" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Cars">
           <Key>
@@ -31,17 +31,8 @@
           <Property Name="CarsInServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CarID" Type="int" Nullable="false" />
           <Property Name="Comments" Type="nchar" MaxLength="250" />
-          <Property Name="CarStatus" Type="int" Nullable="false" />
-          <Property Name="StartServTime" Type="datetime" />
-          <Property Name="StopServTime" Type="datetime" />
-        </EntityType>
-        <EntityType Name="CarsSold">
-          <Key>
-            <PropertyRef Name="CarsSoldID" />
-          </Key>
-          <Property Name="CarsSoldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CarID" Type="int" Nullable="false" />
-          <Property Name="SoldTime" Type="datetime" />
+          <Property Name="StartServTime" Type="date" />
+          <Property Name="StopServTime" Type="date" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -50,13 +41,6 @@
           <Property Name="ClientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClientName" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="ClientSurname" Type="nchar" MaxLength="30" Nullable="false" />
-        </EntityType>
-        <EntityType Name="RepairStatus">
-          <Key>
-            <PropertyRef Name="RepairStatusID" />
-          </Key>
-          <Property Name="RepairStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RepairStatusText" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Car_CarInService">
           <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
@@ -78,30 +62,6 @@
               <PropertyRef Name="CarID" />
             </Principal>
             <Dependent Role="CarInUse">
-              <PropertyRef Name="CarID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CarInService_RepairStatus">
-          <End Role="RepairStatus" Type="Self.RepairStatus" Multiplicity="1" />
-          <End Role="CarsInService" Type="Self.CarsInService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RepairStatus">
-              <PropertyRef Name="RepairStatusID" />
-            </Principal>
-            <Dependent Role="CarsInService">
-              <PropertyRef Name="CarStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cars_CarsSold">
-          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
-          <End Role="CarsSold" Type="Self.CarsSold" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cars">
-              <PropertyRef Name="CarID" />
-            </Principal>
-            <Dependent Role="CarsSold">
               <PropertyRef Name="CarID" />
             </Dependent>
           </ReferentialConstraint>
@@ -122,9 +82,7 @@
           <EntitySet Name="CarInUse" EntityType="Self.CarInUse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarsInService" EntityType="Self.CarsInService" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CarsSold" EntityType="Self.CarsSold" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RepairStatus" EntityType="Self.RepairStatus" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Car_CarInService" Association="Self.FK_Car_CarInService">
             <End Role="Cars" EntitySet="Cars" />
             <End Role="CarsInService" EntitySet="CarsInService" />
@@ -133,24 +91,33 @@
             <End Role="Cars" EntitySet="Cars" />
             <End Role="CarInUse" EntitySet="CarInUse" />
           </AssociationSet>
-          <AssociationSet Name="FK_CarInService_RepairStatus" Association="Self.FK_CarInService_RepairStatus">
-            <End Role="RepairStatus" EntitySet="RepairStatus" />
-            <End Role="CarsInService" EntitySet="CarsInService" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cars_CarsSold" Association="Self.FK_Cars_CarsSold">
-            <End Role="Cars" EntitySet="Cars" />
-            <End Role="CarsSold" EntitySet="CarsSold" />
-          </AssociationSet>
           <AssociationSet Name="FK_Client_CarInUse" Association="Self.FK_Client_CarInUse">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="CarInUse" EntitySet="CarInUse" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SQL_QuickCarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SQL_QuickCarEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarInUse" EntityType="SQL_QuickCarModel.CarInUse" />
+          <EntitySet Name="Cars" EntityType="SQL_QuickCarModel.Cars" />
+          <EntitySet Name="CarsInService" EntityType="SQL_QuickCarModel.CarsInService" />
+          <EntitySet Name="Clients" EntityType="SQL_QuickCarModel.Clients" />
+          <AssociationSet Name="FK_Car_CarInUse" Association="SQL_QuickCarModel.FK_Car_CarInUse">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="CarInUse" EntitySet="CarInUse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_CarInUse" Association="SQL_QuickCarModel.FK_Client_CarInUse">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="CarInUse" EntitySet="CarInUse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Car_CarInService" Association="SQL_QuickCarModel.FK_Car_CarInService">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="CarsInService" EntitySet="CarsInService" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="CarInUse">
           <Key>
             <PropertyRef Name="HireID" />
@@ -158,22 +125,21 @@
           <Property Name="HireID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClientID" Type="Int32" Nullable="false" />
           <Property Name="CarID" Type="Int32" Nullable="false" />
-          <Property Name="StartTime" Type="DateTime" Precision="3" />
-          <Property Name="StopTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Cars" Relationship="Self.FK_Car_CarInUse" FromRole="CarInUse" ToRole="Cars" />
-          <NavigationProperty Name="Clients" Relationship="Self.FK_Client_CarInUse" FromRole="CarInUse" ToRole="Clients" />
+          <Property Name="StartTime" Type="DateTime" Precision="0" />
+          <Property Name="StopTime" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Cars" Relationship="SQL_QuickCarModel.FK_Car_CarInUse" FromRole="CarInUse" ToRole="Cars" />
+          <NavigationProperty Name="Clients" Relationship="SQL_QuickCarModel.FK_Client_CarInUse" FromRole="CarInUse" ToRole="Clients" />
         </EntityType>
         <EntityType Name="Cars">
           <Key>
             <PropertyRef Name="CarID" />
           </Key>
           <Property Name="CarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameCar" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NameCar" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="YearCar" Type="Int32" Nullable="false" />
           <Property Name="TotalUsedTimes" Type="Byte" />
-          <NavigationProperty Name="CarInUse" Relationship="Self.FK_Car_CarInUse" FromRole="Cars" ToRole="CarInUse" />
-          <NavigationProperty Name="CarsInService" Relationship="Self.FK_Car_CarInService" FromRole="Cars" ToRole="CarsInService" />
-          <NavigationProperty Name="CarsSold" Relationship="Self.FK_Cars_CarsSold" FromRole="Cars" ToRole="CarsSold" />
+          <NavigationProperty Name="CarInUse" Relationship="SQL_QuickCarModel.FK_Car_CarInUse" FromRole="Cars" ToRole="CarInUse" />
+          <NavigationProperty Name="CarsInService" Relationship="SQL_QuickCarModel.FK_Car_CarInService" FromRole="Cars" ToRole="CarsInService" />
         </EntityType>
         <EntityType Name="CarsInService">
           <Key>
@@ -182,41 +148,22 @@
           <Property Name="CarsInServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CarID" Type="Int32" Nullable="false" />
           <Property Name="Comments" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
-          <Property Name="CarStatus" Type="Int32" Nullable="false" />
-          <Property Name="StartServTime" Type="DateTime" Precision="3" />
-          <Property Name="StopServTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Cars" Relationship="Self.FK_Car_CarInService" FromRole="CarsInService" ToRole="Cars" />
-          <NavigationProperty Name="RepairStatus" Relationship="Self.FK_CarInService_RepairStatus" FromRole="CarsInService" ToRole="RepairStatus" />
-        </EntityType>
-        <EntityType Name="CarsSold">
-          <Key>
-            <PropertyRef Name="CarsSoldID" />
-          </Key>
-          <Property Name="CarsSoldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CarID" Type="Int32" Nullable="false" />
-          <Property Name="SoldTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Cars" Relationship="Self.FK_Cars_CarsSold" FromRole="CarsSold" ToRole="Cars" />
+          <Property Name="StartServTime" Type="DateTime" Precision="0" />
+          <Property Name="StopServTime" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Cars" Relationship="SQL_QuickCarModel.FK_Car_CarInService" FromRole="CarsInService" ToRole="Cars" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="ClientID" />
           </Key>
           <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="ClientSurname" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="CarInUse" Relationship="Self.FK_Client_CarInUse" FromRole="Clients" ToRole="CarInUse" />
-        </EntityType>
-        <EntityType Name="RepairStatus">
-          <Key>
-            <PropertyRef Name="RepairStatusID" />
-          </Key>
-          <Property Name="RepairStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RepairStatusText" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="CarsInService" Relationship="Self.FK_CarInService_RepairStatus" FromRole="RepairStatus" ToRole="CarsInService" />
+          <Property Name="ClientName" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="ClientSurname" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="CarInUse" Relationship="SQL_QuickCarModel.FK_Client_CarInUse" FromRole="Clients" ToRole="CarInUse" />
         </EntityType>
         <Association Name="FK_Car_CarInUse">
-          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
-          <End Role="CarInUse" Type="Self.CarInUse" Multiplicity="*" />
+          <End Type="SQL_QuickCarModel.Cars" Role="Cars" Multiplicity="1" />
+          <End Type="SQL_QuickCarModel.CarInUse" Role="CarInUse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cars">
               <PropertyRef Name="CarID" />
@@ -227,8 +174,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Client_CarInUse">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="CarInUse" Type="Self.CarInUse" Multiplicity="*" />
+          <End Type="SQL_QuickCarModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="SQL_QuickCarModel.CarInUse" Role="CarInUse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="ClientID" />
@@ -239,8 +186,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Car_CarInService">
-          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
-          <End Role="CarsInService" Type="Self.CarsInService" Multiplicity="*" />
+          <End Type="SQL_QuickCarModel.Cars" Role="Cars" Multiplicity="1" />
+          <End Type="SQL_QuickCarModel.CarsInService" Role="CarsInService" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cars">
               <PropertyRef Name="CarID" />
@@ -250,58 +197,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cars_CarsSold">
-          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
-          <End Role="CarsSold" Type="Self.CarsSold" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cars">
-              <PropertyRef Name="CarID" />
-            </Principal>
-            <Dependent Role="CarsSold">
-              <PropertyRef Name="CarID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CarInService_RepairStatus">
-          <End Role="RepairStatus" Type="Self.RepairStatus" Multiplicity="1" />
-          <End Role="CarsInService" Type="Self.CarsInService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RepairStatus">
-              <PropertyRef Name="RepairStatusID" />
-            </Principal>
-            <Dependent Role="CarsInService">
-              <PropertyRef Name="CarStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="SQL_QuickCarEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CarInUse" EntityType="Self.CarInUse" />
-          <EntitySet Name="Cars" EntityType="Self.Cars" />
-          <EntitySet Name="CarsInService" EntityType="Self.CarsInService" />
-          <EntitySet Name="CarsSold" EntityType="Self.CarsSold" />
-          <EntitySet Name="Clients" EntityType="Self.Clients" />
-          <EntitySet Name="RepairStatus" EntityType="Self.RepairStatus" />
-          <AssociationSet Name="FK_Car_CarInUse" Association="Self.FK_Car_CarInUse">
-            <End Role="Cars" EntitySet="Cars" />
-            <End Role="CarInUse" EntitySet="CarInUse" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Client_CarInUse" Association="Self.FK_Client_CarInUse">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="CarInUse" EntitySet="CarInUse" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Car_CarInService" Association="Self.FK_Car_CarInService">
-            <End Role="Cars" EntitySet="Cars" />
-            <End Role="CarsInService" EntitySet="CarsInService" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cars_CarsSold" Association="Self.FK_Cars_CarsSold">
-            <End Role="Cars" EntitySet="Cars" />
-            <End Role="CarsSold" EntitySet="CarsSold" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CarInService_RepairStatus" Association="Self.FK_CarInService_RepairStatus">
-            <End Role="RepairStatus" EntitySet="RepairStatus" />
-            <End Role="CarsInService" EntitySet="CarsInService" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -311,59 +206,41 @@
           <EntitySetMapping Name="CarInUse">
             <EntityTypeMapping TypeName="SQL_QuickCarModel.CarInUse">
               <MappingFragment StoreEntitySet="CarInUse">
-                <ScalarProperty Name="HireID" ColumnName="HireID" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="CarID" ColumnName="CarID" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="StopTime" ColumnName="StopTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="HireID" ColumnName="HireID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cars">
             <EntityTypeMapping TypeName="SQL_QuickCarModel.Cars">
               <MappingFragment StoreEntitySet="Cars">
-                <ScalarProperty Name="CarID" ColumnName="CarID" />
-                <ScalarProperty Name="NameCar" ColumnName="NameCar" />
-                <ScalarProperty Name="YearCar" ColumnName="YearCar" />
                 <ScalarProperty Name="TotalUsedTimes" ColumnName="TotalUsedTimes" />
+                <ScalarProperty Name="YearCar" ColumnName="YearCar" />
+                <ScalarProperty Name="NameCar" ColumnName="NameCar" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CarsInService">
             <EntityTypeMapping TypeName="SQL_QuickCarModel.CarsInService">
               <MappingFragment StoreEntitySet="CarsInService">
-                <ScalarProperty Name="CarsInServiceID" ColumnName="CarsInServiceID" />
-                <ScalarProperty Name="CarID" ColumnName="CarID" />
-                <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="CarStatus" ColumnName="CarStatus" />
-                <ScalarProperty Name="StartServTime" ColumnName="StartServTime" />
                 <ScalarProperty Name="StopServTime" ColumnName="StopServTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CarsSold">
-            <EntityTypeMapping TypeName="SQL_QuickCarModel.CarsSold">
-              <MappingFragment StoreEntitySet="CarsSold">
-                <ScalarProperty Name="CarsSoldID" ColumnName="CarsSoldID" />
+                <ScalarProperty Name="StartServTime" ColumnName="StartServTime" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="CarID" ColumnName="CarID" />
-                <ScalarProperty Name="SoldTime" ColumnName="SoldTime" />
+                <ScalarProperty Name="CarsInServiceID" ColumnName="CarsInServiceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="SQL_QuickCarModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
                 <ScalarProperty Name="ClientSurname" ColumnName="ClientSurname" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RepairStatus">
-            <EntityTypeMapping TypeName="SQL_QuickCarModel.RepairStatus">
-              <MappingFragment StoreEntitySet="RepairStatus">
-                <ScalarProperty Name="RepairStatusID" ColumnName="RepairStatusID" />
-                <ScalarProperty Name="RepairStatusText" ColumnName="RepairStatusText" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -86,7 +86,9 @@ namespace QuickCar
             {
                 var index = ListBox_Cars.SelectedIndex;
                 var car = context.Cars.ToList()[index];
+                Text_YearCar.Text = car.YearCar.ToString();
                 var relationcar = context.CarInUse.FirstOrDefault(c => c.CarID == car.CarID);
+                var relationcarinservice = context.CarsInService.FirstOrDefault(c => c.CarID == car.CarID);
                 if (relationcar == null)
                 {
                     IsUsingCheckBox.IsChecked = false;
@@ -94,6 +96,7 @@ namespace QuickCar
                     Text_ClientSurname.Text = "*brak klienta*";
                     Text_StartTime.Text = "**-**-****";
                     Text_StopTime.Text = "**-**-****";
+                    
                 }
                 else
                 {
@@ -101,10 +104,23 @@ namespace QuickCar
                     var relationclient = context.Clients.FirstOrDefault(c => c.ClientID == relationcar.ClientID);
                     Text_ClientName.Text = relationclient.ClientName.ToString();
                     Text_ClientSurname.Text = relationclient.ClientSurname.ToString();
-                    Text_StartTime.Text = relationcar.StartTime.ToString();
-                    Text_StopTime.Text = relationcar.StopTime.ToString();
+                    Text_StartTime.Text = relationcar.StartTime.Value.ToString("dd-MM-yyyy");
+                    Text_StopTime.Text = relationcar.StopTime.ToString("dd-MM-yyyy");
                 }
-                Text_YearCar.Text = car.YearCar.ToString();
+                if (relationcarinservice == null)
+                {
+                    IsRepairingCheckBox.IsChecked = false;
+                    Text_StartTimeRepair.Text = "**-**-****";
+                    Text_StopTimeRepair.Text = "**-**-****";
+                    Text_Comment.Text = "Wpisz komentarz...";
+                }
+                else
+                {
+                    IsRepairingCheckBox.IsChecked = true;
+                    Text_StartTimeRepair.Text = relationcarinservice.StartServTime.Value.ToString("dd-MM-yyyy");
+                    Text_StopTimeRepair.Text = relationcarinservice.StopServTime.Value.ToString("dd-MM-yyyy");
+                    Text_Comment.Text = relationcarinservice.Comments.ToString();
+                }
             }
         }
 
@@ -140,6 +156,11 @@ namespace QuickCar
         {
             DeleteCarWindow deleteCarWindow = new DeleteCarWindow();
             deleteCarWindow.Show();
+        }
+
+        private void Button_SaveEdit_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

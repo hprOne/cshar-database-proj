@@ -28,8 +28,6 @@ namespace QuickCar
         public virtual DbSet<CarInUse> CarInUse { get; set; }
         public virtual DbSet<Cars> Cars { get; set; }
         public virtual DbSet<CarsInService> CarsInService { get; set; }
-        public virtual DbSet<CarsSold> CarsSold { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
-        public virtual DbSet<RepairStatus> RepairStatus { get; set; }
     }
 }

@@ -19,7 +19,6 @@ namespace QuickCar
         {
             this.CarInUse = new HashSet<CarInUse>();
             this.CarsInService = new HashSet<CarsInService>();
-            this.CarsSold = new HashSet<CarsSold>();
         }
     
         public int CarID { get; set; }
@@ -31,7 +30,5 @@ namespace QuickCar
         public virtual ICollection<CarInUse> CarInUse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarsInService> CarsInService { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CarsSold> CarsSold { get; set; }
     }
 }

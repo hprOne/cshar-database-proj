@@ -17,11 +17,9 @@ namespace QuickCar
         public int CarsInServiceID { get; set; }
         public int CarID { get; set; }
         public string Comments { get; set; }
-        public int CarStatus { get; set; }
         public Nullable<System.DateTime> StartServTime { get; set; }
         public Nullable<System.DateTime> StopServTime { get; set; }
     
         public virtual Cars Cars { get; set; }
-        public virtual RepairStatus RepairStatus { get; set; }
     }
 }
