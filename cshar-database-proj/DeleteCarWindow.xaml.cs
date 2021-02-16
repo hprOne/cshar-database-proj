@@ -19,12 +19,18 @@ namespace QuickCar
     /// </summary>
     public partial class DeleteCarWindow : Window
     {
+        MainWindow mainWindow = new MainWindow();
         public DeleteCarWindow()
         {
             InitializeComponent();
         }
 
         private void ButtonNo_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ButtonYes_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

@@ -20,7 +20,7 @@ namespace QuickCar
     /// Logika interakcji dla klasy MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    {        
         private void LoadTable()
         {
             using (var context = new SQL_QuickCarEntities())
@@ -80,12 +80,13 @@ namespace QuickCar
             LoadTable();
         }
 
+        public int index_listbox = 0;
         private void ListBox_Cars_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             using (var context = new SQL_QuickCarEntities())
             {
-                var index = ListBox_Cars.SelectedIndex;
-                var car = context.Cars.ToList()[index];
+                index_listbox = ListBox_Cars.SelectedIndex;
+                var car = context.Cars.ToList()[index_listbox];
                 Text_YearCar.Text = car.YearCar.ToString();
                 var relationcar = context.CarInUse.FirstOrDefault(c => c.CarID == car.CarID);
                 var relationcarinservice = context.CarsInService.FirstOrDefault(c => c.CarID == car.CarID);
