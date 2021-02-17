@@ -15,7 +15,7 @@
             <ImageBrush ImageSource="background.jpg"/>
         </Grid.Background>
         <Button x:Name="Button_StartProgram_" Content="Uruchom Bazę QuickCar!" HorizontalAlignment="Left" Height="55" Margin="465,355,0,0" VerticalAlignment="Top" Width="355" Click="Button_StartProgram"/>
-        <TextBlock x:Name="MainText" Foreground="#FFFFFF" HorizontalAlignment="Left" Height="80" Margin="324,199,0,0" TextWrapping="Wrap" Text="QuickCar App v1.0" VerticalAlignment="Top" Width="634" TextAlignment="Center" FontSize="72" RenderTransformOrigin="0.774,0.545" FontWeight="Bold" FontFamily="Magneto"/>
+        <TextBlock x:Name="MainText" Foreground="#07f58b" HorizontalAlignment="Left" Height="175" Margin="324,104,0,0" TextWrapping="Wrap" Text="QuickCar App v1.0" VerticalAlignment="Top" Width="634" TextAlignment="Center" FontSize="72" RenderTransformOrigin="0.774,0.545" FontWeight="Bold" FontFamily="Script MT Bold"/>
         <Button x:Name="Button_EndProgram_" Content="Zamknij program :(" HorizontalAlignment="Left" Height="55" Margin="465,470,0,0" VerticalAlignment="Top" Width="355" Click="Button_EndProgram"/>
     </Grid>
 </Window>

@@ -64,7 +64,7 @@ namespace QuickCar
         }
         private void Button_AddCar_Click(object sender, RoutedEventArgs e)
         {
-           AddCarWindow addCarWindow = new AddCarWindow(this);
+            AddCarWindow addCarWindow = new AddCarWindow(this);
             addCarWindow.Show();
         }
 
@@ -101,8 +101,7 @@ namespace QuickCar
                     Text_ClientName.Text = "*brak klienta*";
                     Text_ClientSurname.Text = "*brak klienta*";
                     Text_StartTime.Text = "**-**-****";
-                    Text_StopTime.Text = "**-**-****";
-                    
+                    Text_StopTime.Text = "**-**-****";                   
                 }
                 else
                 {
@@ -137,6 +136,8 @@ namespace QuickCar
             Text_Comment.IsEnabled = true;
             Text_StartTime.IsEnabled = true;
             Text_StopTime.IsEnabled = true;
+            Text_StartTimeRepair.IsEnabled = true;
+            Text_StopTimeRepair.IsEnabled = true;
             Text_YearCar.IsEnabled = true;
             IsRepairingCheckBox.IsEnabled = true;
             IsUsingCheckBox.IsEnabled = true;
@@ -151,11 +152,35 @@ namespace QuickCar
             Text_Comment.IsEnabled = false;
             Text_StartTime.IsEnabled = false;
             Text_StopTime.IsEnabled = false;
+            Text_StartTimeRepair.IsEnabled = false;
+            Text_StopTimeRepair.IsEnabled = false;
             Text_YearCar.IsEnabled = false;
             IsRepairingCheckBox.IsEnabled = false;
             IsUsingCheckBox.IsEnabled = false;
             Button_SaveEdit.IsEnabled = false;
             Text_Comment.IsEnabled = false;
+        }
+
+        private void IsRepairingCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (AllowEdit_CheckBox.IsChecked is true)
+            {
+                Text_StartTime.IsEnabled = false;
+                Text_StopTime.IsEnabled = false;
+                Text_StartTimeRepair.IsEnabled = true;
+                Text_StopTimeRepair.IsEnabled = true;
+            }
+        }
+
+        private void IsUsingCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (AllowEdit_CheckBox.IsChecked is true)
+            {
+                Text_StartTimeRepair.IsEnabled = false;
+                Text_StopTimeRepair.IsEnabled = false;
+                Text_StartTime.IsEnabled = true;
+                Text_StopTime.IsEnabled = true;
+            }
         }
 
         private void Button_DeleteCar_Click(object sender, RoutedEventArgs e)
@@ -174,7 +199,7 @@ namespace QuickCar
 
             int testYear;
             bool isNumeric = int.TryParse(Text_YearCar.Text, out testYear);
-            if (isNumeric is false)
+            if (isNumeric is false && Text_YearCar.Text.Length != 4)
             {
                 throw new ArgumentException(String.Format("Wprowadzono złą wartość Roku produkcji!!!"));
             }
@@ -194,7 +219,10 @@ namespace QuickCar
 
             using (var context = new SQL_QuickCarEntities())
             {
-                
+                var car = context.Cars.ToList()[index_listbox];
+                var relationcar = context.CarInUse.FirstOrDefault(c => c.CarID == car.CarID);
+                var relationcarinservice = context.CarsInService.FirstOrDefault(c => c.CarID == car.CarID);
+                //SQL Update line
             }
         }
     }
