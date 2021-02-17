@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -165,7 +166,36 @@ namespace QuickCar
 
         private void Button_SaveEdit_Click(object sender, RoutedEventArgs e)
         {
+            if (IsRepairingCheckBox.IsChecked is true && 
+                IsUsingCheckBox.IsChecked is true)
+            {
+                throw new ArgumentException(String.Format("Samochód nie może być jednocześnie w serwisie i u klienta!!!"));
+            }
 
+            int testYear;
+            bool isNumeric = int.TryParse(Text_YearCar.Text, out testYear);
+            if (isNumeric is false)
+            {
+                throw new ArgumentException(String.Format("Wprowadzono złą wartość Roku produkcji!!!"));
+            }
+
+            var parseResult = DateTime.TryParse(Text_StartTime.Text, out _) &
+                DateTime.TryParse(Text_StartTime.Text, out _) &
+                DateTime.TryParse(Text_StartTimeRepair.Text, out _) &
+                DateTime.TryParse(Text_StopTimeRepair.Text, out _);
+            if (parseResult is false && 
+                Text_StartTime.Text != "**-**-****" && 
+                Text_StopTime.Text != "**-**-****" && 
+                Text_StartTimeRepair.Text != "**-**-****" && 
+                Text_StopTimeRepair.Text != "**-**-****")
+            {
+                throw new ArgumentException(String.Format("Wprowadzono złą datę!!!"));
+            }
+
+            using (var context = new SQL_QuickCarEntities())
+            {
+                
+            }
         }
     }
 }

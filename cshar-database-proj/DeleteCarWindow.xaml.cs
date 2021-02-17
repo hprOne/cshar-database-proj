@@ -53,7 +53,6 @@ namespace QuickCar
                     context.Cars.Remove(car);
                     context.SaveChanges();
                 }
-                index_listbox++;
                 MainWindow.LoadTable();
             }            
             this.Close();
