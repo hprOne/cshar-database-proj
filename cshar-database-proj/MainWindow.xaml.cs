@@ -21,7 +21,7 @@ namespace QuickCar
     /// </summary>
     public partial class MainWindow : Window
     {        
-        private void LoadTable()
+        public void LoadTable()
         {
             using (var context = new SQL_QuickCarEntities())
             {
@@ -63,7 +63,7 @@ namespace QuickCar
         }
         private void Button_AddCar_Click(object sender, RoutedEventArgs e)
         {
-           AddCarWindow addCarWindow = new AddCarWindow();
+           AddCarWindow addCarWindow = new AddCarWindow(this);
             addCarWindow.Show();
         }
 
@@ -86,6 +86,10 @@ namespace QuickCar
             using (var context = new SQL_QuickCarEntities())
             {
                 index_listbox = ListBox_Cars.SelectedIndex;
+                if (index_listbox < 0)
+                {
+                    index_listbox = 0;
+                }
                 var car = context.Cars.ToList()[index_listbox];
                 Text_YearCar.Text = car.YearCar.ToString();
                 var relationcar = context.CarInUse.FirstOrDefault(c => c.CarID == car.CarID);
@@ -155,7 +159,7 @@ namespace QuickCar
 
         private void Button_DeleteCar_Click(object sender, RoutedEventArgs e)
         {
-            DeleteCarWindow deleteCarWindow = new DeleteCarWindow();
+            DeleteCarWindow deleteCarWindow = new DeleteCarWindow(this);
             deleteCarWindow.Show();
         }
 

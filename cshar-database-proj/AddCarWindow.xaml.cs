@@ -21,10 +21,13 @@ namespace QuickCar
     public partial class AddCarWindow : Window
     {
         SQL_QuickCarEntities db = new SQL_QuickCarEntities();
-        public AddCarWindow()
+        public AddCarWindow(MainWindow mainWindow)
         {
             InitializeComponent();
+            MainWindow = mainWindow;
         }
+
+        public MainWindow MainWindow { get; }
 
         private void Button_ExitNewCar_Click(object sender, RoutedEventArgs e)
         {
@@ -39,7 +42,8 @@ namespace QuickCar
                 YearCar = int.Parse(AddCar_Year.Text),
             };
             db.Cars.Add(newCar);
-            db.SaveChanges();          
+            db.SaveChanges();
+            MainWindow.LoadTable();
             this.Close();
         }
     }

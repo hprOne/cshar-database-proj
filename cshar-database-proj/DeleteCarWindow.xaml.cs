@@ -19,11 +19,13 @@ namespace QuickCar
     /// </summary>
     public partial class DeleteCarWindow : Window
     {
-        MainWindow mainWindow = new MainWindow();
-        public DeleteCarWindow()
+        public DeleteCarWindow(MainWindow mainWindow)
         {
             InitializeComponent();
+            MainWindow = mainWindow;
         }
+
+        public MainWindow MainWindow { get; }
 
         private void ButtonNo_Click(object sender, RoutedEventArgs e)
         {
@@ -32,6 +34,28 @@ namespace QuickCar
 
         private void ButtonYes_Click(object sender, RoutedEventArgs e)
         {
+            int index_listbox = MainWindow.ListBox_Cars.SelectedIndex;
+            using (var context = new SQL_QuickCarEntities())
+            {
+                var car = context.Cars.ToList()[index_listbox];
+                var relationcar = context.CarInUse.FirstOrDefault(c => c.CarID == car.CarID);
+                var relationcarinservice = context.CarsInService.FirstOrDefault(c => c.CarID == car.CarID);
+                if (relationcarinservice != null)
+                {
+                    throw new ArgumentException(String.Format("Samochód jest w serwisie!!!"));
+                }
+                else if (relationcar != null)
+                {
+                    throw new ArgumentException(String.Format("Samochód jest wypożyczony przez klienta!!!"));
+                }
+                else
+                {
+                    context.Cars.Remove(car);
+                    context.SaveChanges();
+                }
+                index_listbox++;
+                MainWindow.LoadTable();
+            }            
             this.Close();
         }
     }
