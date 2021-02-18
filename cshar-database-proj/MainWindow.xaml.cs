@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using cshar_database_proj;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace QuickCar
 {
@@ -131,13 +133,11 @@ namespace QuickCar
 
         private void AllowEdit_CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            Text_ClientName.IsEnabled = true;
-            Text_ClientSurname.IsEnabled = true;
             Text_Comment.IsEnabled = true;
-            Text_StartTime.IsEnabled = true;
-            Text_StopTime.IsEnabled = true;
-            Text_StartTimeRepair.IsEnabled = true;
-            Text_StopTimeRepair.IsEnabled = true;
+            //Text_StartTime.IsEnabled = true;
+            //Text_StopTime.IsEnabled = true;
+            //Text_StartTimeRepair.IsEnabled = true;
+            //Text_StopTimeRepair.IsEnabled = true;
             Text_YearCar.IsEnabled = true;
             IsRepairingCheckBox.IsEnabled = true;
             IsUsingCheckBox.IsEnabled = true;
@@ -165,6 +165,9 @@ namespace QuickCar
         {
             if (AllowEdit_CheckBox.IsChecked is true)
             {
+                Text_ClientName.IsEnabled = false;
+                Text_ClientSurname.IsEnabled = false;
+                IsUsingCheckBox.IsChecked = false;
                 Text_StartTime.IsEnabled = false;
                 Text_StopTime.IsEnabled = false;
                 Text_StartTimeRepair.IsEnabled = true;
@@ -176,11 +179,27 @@ namespace QuickCar
         {
             if (AllowEdit_CheckBox.IsChecked is true)
             {
+                Text_ClientName.IsEnabled = true;
+                Text_ClientSurname.IsEnabled = true;
+                IsRepairingCheckBox.IsChecked = false;
                 Text_StartTimeRepair.IsEnabled = false;
                 Text_StopTimeRepair.IsEnabled = false;
                 Text_StartTime.IsEnabled = true;
                 Text_StopTime.IsEnabled = true;
             }
+        }
+        private void IsRepairingCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Text_StartTimeRepair.IsEnabled = false;
+            Text_StopTimeRepair.IsEnabled = false;
+        }
+
+        private void IsUsingCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Text_ClientName.IsEnabled = false;
+            Text_ClientSurname.IsEnabled = false;
+            Text_StartTime.IsEnabled = false;
+            Text_StopTime.IsEnabled = false;
         }
 
         private void Button_DeleteCar_Click(object sender, RoutedEventArgs e)
@@ -204,10 +223,15 @@ namespace QuickCar
                 throw new ArgumentException(String.Format("Wprowadzono złą wartość Roku produkcji!!!"));
             }
 
-            var parseResult = DateTime.TryParse(Text_StartTime.Text, out _) &
-                DateTime.TryParse(Text_StartTime.Text, out _) &
-                DateTime.TryParse(Text_StartTimeRepair.Text, out _) &
-                DateTime.TryParse(Text_StopTimeRepair.Text, out _);
+            var dateStartTime = new DateTime();
+            var dateStopTime = new DateTime();
+            var dateStartTimeRepair = new DateTime();
+            var dateStopTimeRepair = new DateTime();
+
+            var parseResult = DateTime.TryParse(Text_StartTime.Text, out dateStartTime) &
+                DateTime.TryParse(Text_StopTime.Text, out dateStopTime) &
+                DateTime.TryParse(Text_StartTimeRepair.Text, out dateStartTimeRepair) &
+                DateTime.TryParse(Text_StopTimeRepair.Text, out dateStopTimeRepair);
             if (parseResult is false && 
                 Text_StartTime.Text != "**-**-****" && 
                 Text_StopTime.Text != "**-**-****" && 
@@ -221,8 +245,43 @@ namespace QuickCar
             {
                 var car = context.Cars.ToList()[index_listbox];
                 var relationcar = context.CarInUse.FirstOrDefault(c => c.CarID == car.CarID);
+                var clientnew = context.Clients.FirstOrDefault(c => c.ClientID == car.CarID);
                 var relationcarinservice = context.CarsInService.FirstOrDefault(c => c.CarID == car.CarID);
-                //SQL Update line
+                //SQL Update line                
+                if (IsUsingCheckBox.IsChecked == true)
+                {
+                    Clients newClient = new Clients()
+                    {
+                        ClientName = Text_ClientName.Text,
+                        ClientSurname = Text_ClientSurname.Text
+                    };
+                    CarInUse newCarInUse = new CarInUse()
+                    {
+                        ClientID = newClient.ClientID,
+                        CarID = car.CarID,
+                        StartTime = dateStartTime,
+                        StopTime = dateStopTime
+                    };
+                    context.Clients.Add(newClient);
+                    context.CarInUse.Add(newCarInUse);
+                    context.SaveChanges();
+                }
+                if (IsRepairingCheckBox.IsChecked == true)
+                {
+                    CarInUse newCarInUse = new CarInUse()
+                    {
+                        ClientID = -1,
+                        CarID = -1,
+                        StartTime = null,
+                    };
+                    CarsInService newCarsInService = new CarsInService()
+                    {
+                        StartServTime = dateStartTimeRepair,
+                        StopServTime = dateStopTimeRepair
+                    };
+                    context.CarsInService.Add(newCarsInService);
+                    context.SaveChanges();
+                }
             }
         }
     }
