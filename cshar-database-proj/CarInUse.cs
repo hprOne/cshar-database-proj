@@ -18,7 +18,7 @@ namespace QuickCar
         public int ClientID { get; set; }
         public int CarID { get; set; }
         public Nullable<System.DateTime> StartTime { get; set; }
-        public System.DateTime StopTime { get; set; }
+        public Nullable<System.DateTime> StopTime { get; set; }
     
         public virtual Cars Cars { get; set; }
         public virtual Clients Clients { get; set; }

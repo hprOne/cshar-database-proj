@@ -12,8 +12,8 @@
           <Property Name="HireID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClientID" Type="int" Nullable="false" />
           <Property Name="CarID" Type="int" Nullable="false" />
-          <Property Name="StartTime" Type="date" />
-          <Property Name="StopTime" Type="date" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="StopTime" Type="datetime" />
         </EntityType>
         <EntityType Name="Cars">
           <Key>
@@ -125,8 +125,8 @@
           <Property Name="HireID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClientID" Type="Int32" Nullable="false" />
           <Property Name="CarID" Type="Int32" Nullable="false" />
-          <Property Name="StartTime" Type="DateTime" Precision="0" />
-          <Property Name="StopTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="StopTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Cars" Relationship="SQL_QuickCarModel.FK_Car_CarInUse" FromRole="CarInUse" ToRole="Cars" />
           <NavigationProperty Name="Clients" Relationship="SQL_QuickCarModel.FK_Client_CarInUse" FromRole="CarInUse" ToRole="Clients" />
         </EntityType>

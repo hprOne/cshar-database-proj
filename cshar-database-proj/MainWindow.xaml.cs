@@ -112,7 +112,7 @@ namespace QuickCar
                     Text_ClientName.Text = relationclient.ClientName.ToString();
                     Text_ClientSurname.Text = relationclient.ClientSurname.ToString();
                     Text_StartTime.Text = relationcar.StartTime.Value.ToString("dd-MM-yyyy");
-                    Text_StopTime.Text = relationcar.StopTime.ToString("dd-MM-yyyy");
+                    Text_StopTime.Text = relationcar.StopTime.Value.ToString("dd-MM-yyyy");
                 }
                 if (relationcarinservice == null)
                 {
@@ -250,6 +250,11 @@ namespace QuickCar
                 //SQL Update line                
                 if (IsUsingCheckBox.IsChecked == true)
                 {
+                    CarsInService newCarsInService = new CarsInService()
+                    {
+                        StartServTime = null,
+                        StopServTime = null
+                    };
                     Clients newClient = new Clients()
                     {
                         ClientName = Text_ClientName.Text,
@@ -268,12 +273,8 @@ namespace QuickCar
                 }
                 if (IsRepairingCheckBox.IsChecked == true)
                 {
-                    CarInUse newCarInUse = new CarInUse()
-                    {
-                        ClientID = -1,
-                        CarID = -1,
-                        StartTime = null,
-                    };
+                    relationcar.StartTime = null;
+                    relationcar.StopTime = null;
                     CarsInService newCarsInService = new CarsInService()
                     {
                         StartServTime = dateStartTimeRepair,
