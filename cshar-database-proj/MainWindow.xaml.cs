@@ -250,11 +250,13 @@ namespace QuickCar
                 //SQL Update line                
                 if (IsUsingCheckBox.IsChecked == true)
                 {
-                    CarsInService newCarsInService = new CarsInService()
+                    relationcar = context.CarInUse.FirstOrDefault(c => c.CarID == car.CarID);
+                    if (relationcarinservice != null)
                     {
-                        StartServTime = null,
-                        StopServTime = null
-                    };
+                        context.CarsInService.Attach(relationcarinservice);
+                        context.CarsInService.Remove(relationcarinservice);
+                        context.SaveChanges();
+                    }
                     Clients newClient = new Clients()
                     {
                         ClientName = Text_ClientName.Text,
@@ -273,14 +275,16 @@ namespace QuickCar
                 }
                 if (IsRepairingCheckBox.IsChecked == true)
                 {
-                    relationcar.StartTime = null;
-                    relationcar.StopTime = null;
-                    CarsInService newCarsInService = new CarsInService()
+                    relationcarinservice = context.CarsInService.FirstOrDefault(c => c.CarID == car.CarID);
+                    if (relationcar != null)
                     {
-                        StartServTime = dateStartTimeRepair,
-                        StopServTime = dateStopTimeRepair
-                    };
-                    context.CarsInService.Add(newCarsInService);
+                        context.CarInUse.Attach(relationcar);
+                        context.CarInUse.Remove(relationcar);
+                        context.SaveChanges();
+                    }
+                    //context.CarInUse.FirstOrDefault(CarInUse.)
+                    relationcarinservice.StartServTime = dateStartTimeRepair;
+                    relationcarinservice.StopServTime = dateStopTimeRepair;
                     context.SaveChanges();
                 }
             }
