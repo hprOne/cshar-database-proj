@@ -23,6 +23,8 @@ namespace QuickCar
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
+
+            //modelBuilder.Entity<CarInUse>(O)
         }
     
         public virtual DbSet<CarInUse> CarInUse { get; set; }

@@ -133,7 +133,6 @@ namespace QuickCar
 
         private void AllowEdit_CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            Text_Comment.IsEnabled = true;
             //Text_StartTime.IsEnabled = true;
             //Text_StopTime.IsEnabled = true;
             //Text_StartTimeRepair.IsEnabled = true;
@@ -142,7 +141,6 @@ namespace QuickCar
             IsRepairingCheckBox.IsEnabled = true;
             IsUsingCheckBox.IsEnabled = true;
             Button_SaveEdit.IsEnabled = true;
-            Text_Comment.IsEnabled = true;
         }
 
         private void AllowEdit_CheckBox_Unchecked(object sender, RoutedEventArgs e)
@@ -172,6 +170,7 @@ namespace QuickCar
                 Text_StopTime.IsEnabled = false;
                 Text_StartTimeRepair.IsEnabled = true;
                 Text_StopTimeRepair.IsEnabled = true;
+                Text_Comment.IsEnabled = true;
             }
         }
 
@@ -186,12 +185,14 @@ namespace QuickCar
                 Text_StopTimeRepair.IsEnabled = false;
                 Text_StartTime.IsEnabled = true;
                 Text_StopTime.IsEnabled = true;
+                Text_Comment.IsEnabled = false;
             }
         }
         private void IsRepairingCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             Text_StartTimeRepair.IsEnabled = false;
             Text_StopTimeRepair.IsEnabled = false;
+            Text_Comment.IsEnabled = false;
         }
 
         private void IsUsingCheckBox_Unchecked(object sender, RoutedEventArgs e)
@@ -247,16 +248,34 @@ namespace QuickCar
                 var relationcar = context.CarInUse.FirstOrDefault(c => c.CarID == car.CarID);
                 var clientnew = context.Clients.FirstOrDefault(c => c.ClientID == car.CarID);
                 var relationcarinservice = context.CarsInService.FirstOrDefault(c => c.CarID == car.CarID);
+
+                var carDb = context.Cars.Include(q => q.CarsInService).Include(q => q.CarInUse).FirstOrDefault(q => q.CarID == car.CarID);
                 //SQL Update line                
+
                 if (IsUsingCheckBox.IsChecked == true)
                 {
                     relationcar = context.CarInUse.FirstOrDefault(c => c.CarID == car.CarID);
+                    if (relationcar == null)
+                    {
+                        Clients newClientRelated = new Clients()
+                        {
+                            ClientName = Text_ClientName.Text,
+                            ClientSurname = Text_ClientSurname.Text
+                        };
+                        CarInUse newCarInUserRelated = new CarInUse()
+                        {
+                            ClientID = newClientRelated.ClientID,
+                            CarID = car.CarID,
+                            StartTime = dateStartTime,
+                            StopTime = dateStopTime
+                        };
+                    }
                     if (relationcarinservice != null)
                     {
-                        context.CarsInService.Attach(relationcarinservice);
                         context.CarsInService.Remove(relationcarinservice);
                         context.SaveChanges();
                     }
+                    
                     Clients newClient = new Clients()
                     {
                         ClientName = Text_ClientName.Text,
@@ -269,22 +288,35 @@ namespace QuickCar
                         StartTime = dateStartTime,
                         StopTime = dateStopTime
                     };
+                    
                     context.Clients.Add(newClient);
                     context.CarInUse.Add(newCarInUse);
                     context.SaveChanges();
                 }
                 if (IsRepairingCheckBox.IsChecked == true)
                 {
+                    
                     relationcarinservice = context.CarsInService.FirstOrDefault(c => c.CarID == car.CarID);
+                    if (relationcarinservice == null)
+                    {
+                        relationcarinservice = new CarsInService()
+                        {
+                            CarID = car.CarID,
+                            StartServTime = dateStartTimeRepair,
+                            StopServTime = dateStopTimeRepair,
+                            Comments = ""
+                        };
+                    }
+
                     if (relationcar != null)
                     {
-                        context.CarInUse.Attach(relationcar);
                         context.CarInUse.Remove(relationcar);
                         context.SaveChanges();
                     }
                     //context.CarInUse.FirstOrDefault(CarInUse.)
                     relationcarinservice.StartServTime = dateStartTimeRepair;
                     relationcarinservice.StopServTime = dateStopTimeRepair;
+                    context.CarsInService.Add(relationcarinservice);
                     context.SaveChanges();
                 }
             }

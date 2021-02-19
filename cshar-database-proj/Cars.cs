@@ -11,7 +11,9 @@ namespace QuickCar
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Cars
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +23,8 @@ namespace QuickCar
             this.CarsInService = new HashSet<CarsInService>();
         }
     
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CarID { get; set; }
         public string NameCar { get; set; }
         public int YearCar { get; set; }
