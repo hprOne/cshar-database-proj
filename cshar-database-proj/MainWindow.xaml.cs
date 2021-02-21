@@ -24,6 +24,7 @@ namespace QuickCar
     /// </summary>
     public partial class MainWindow : Window
     {        
+        //Ładowanie ListBox
         public void LoadTable()
         {
             using (var context = new SQL_QuickCarEntities())
@@ -83,6 +84,7 @@ namespace QuickCar
             LoadTable();
         }
 
+        //Index ListBox - zaznaczony element w Liście
         public int index_listbox = 0;
         private void ListBox_Cars_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -255,6 +257,23 @@ namespace QuickCar
                 if (IsUsingCheckBox.IsChecked == true)
                 {
                     relationcar = context.CarInUse.FirstOrDefault(c => c.CarID == car.CarID);
+                    if (relationcar != null)
+                    {
+                        Clients newClient = new Clients()
+                        {
+                            ClientName = Text_ClientName.Text,
+                            ClientSurname = Text_ClientSurname.Text
+                        };
+                        CarInUse newCarInUse = new CarInUse()
+                        {
+                            ClientID = newClient.ClientID,
+                            CarID = car.CarID,
+                            StartTime = dateStartTime,
+                            StopTime = dateStopTime
+                        };
+                        context.Clients.Add(newClient);
+                        context.CarInUse.Add(newCarInUse);
+                    }
                     if (relationcar == null)
                     {
                         Clients newClientRelated = new Clients()
@@ -262,35 +281,21 @@ namespace QuickCar
                             ClientName = Text_ClientName.Text,
                             ClientSurname = Text_ClientSurname.Text
                         };
-                        CarInUse newCarInUserRelated = new CarInUse()
+                        CarInUse newCarInUseRelated = new CarInUse()
                         {
                             ClientID = newClientRelated.ClientID,
                             CarID = car.CarID,
                             StartTime = dateStartTime,
                             StopTime = dateStopTime
                         };
+                        context.Clients.Add(newClientRelated);
+                        context.CarInUse.Add(newCarInUseRelated);
                     }
                     if (relationcarinservice != null)
                     {
                         context.CarsInService.Remove(relationcarinservice);
                         context.SaveChanges();
                     }
-                    
-                    Clients newClient = new Clients()
-                    {
-                        ClientName = Text_ClientName.Text,
-                        ClientSurname = Text_ClientSurname.Text
-                    };
-                    CarInUse newCarInUse = new CarInUse()
-                    {
-                        ClientID = newClient.ClientID,
-                        CarID = car.CarID,
-                        StartTime = dateStartTime,
-                        StopTime = dateStopTime
-                    };
-                    
-                    context.Clients.Add(newClient);
-                    context.CarInUse.Add(newCarInUse);
                     context.SaveChanges();
                 }
                 if (IsRepairingCheckBox.IsChecked == true)
@@ -304,7 +309,7 @@ namespace QuickCar
                             CarID = car.CarID,
                             StartServTime = dateStartTimeRepair,
                             StopServTime = dateStopTimeRepair,
-                            Comments = ""
+                            Comments = Text_Comment.Text
                         };
                     }
 

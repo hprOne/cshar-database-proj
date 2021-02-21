@@ -25,6 +25,7 @@ namespace QuickCar
             MainWindow = mainWindow;
         }
 
+        //odwołanie do MainWindow - w celu odświeżenia ListBox
         public MainWindow MainWindow { get; }
 
         private void ButtonNo_Click(object sender, RoutedEventArgs e)
