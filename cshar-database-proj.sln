@@ -5,16 +5,24 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cshar-database-proj", "cshar-database-proj\cshar-database-proj.csproj", "{9417DDC9-3A18-48CF-B857-7A4DBABC17F1}"
 EndProject
+Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "Installer_QCApp", "Installer_QCApp\Installer_QCApp.aiproj", "{482B67AD-2B09-4715-86B5-FCEF1C1CCF68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		All|Any CPU = All|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9417DDC9-3A18-48CF-B857-7A4DBABC17F1}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{9417DDC9-3A18-48CF-B857-7A4DBABC17F1}.All|Any CPU.Build.0 = Release|Any CPU
 		{9417DDC9-3A18-48CF-B857-7A4DBABC17F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9417DDC9-3A18-48CF-B857-7A4DBABC17F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9417DDC9-3A18-48CF-B857-7A4DBABC17F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9417DDC9-3A18-48CF-B857-7A4DBABC17F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{482B67AD-2B09-4715-86B5-FCEF1C1CCF68}.All|Any CPU.ActiveCfg = DefaultBuild
+		{482B67AD-2B09-4715-86B5-FCEF1C1CCF68}.Debug|Any CPU.ActiveCfg = DefaultBuild
+		{482B67AD-2B09-4715-86B5-FCEF1C1CCF68}.Release|Any CPU.ActiveCfg = DefaultBuild
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
